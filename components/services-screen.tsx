@@ -1,19 +1,25 @@
 "use client"
 
-import { Key, Coffee, Car, Gift, MessageCircle, HelpCircle, ShoppingCart, ChevronRight } from "lucide-react"
+import { Key, Coffee, Car, Gift, MessageCircle, HelpCircle, ShoppingCart, ChevronRight, School } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 const services = [
-  { title: "Бронирование комнат для переговоров/залов", icon: Coffee },
-  { title: "Заказ пропусков", icon: Key },
-  { title: "Заказ курьера", icon: Car },
-  { title: "Сообщить о потерянной/найденной вещи (Бюро находок)", icon: Gift },
-  { title: "Чат-бот", icon: MessageCircle },
-  { title: "Часто задаваемые вопросы (FAQ)", icon: HelpCircle },
-  { title: "Интернет-магазин с мерчем компании", icon: ShoppingCart },
+  { id: "booking", title: "Бронирование комнат для переговоров/залов", icon: Coffee },
+  { id: "pass", title: "Заказ пропусков", icon: Key },
+  { id: "delivery", title: "Заказ курьера", icon: Car },
+  { id: "lost-and-found", title: "Сообщить о потерянной/найденной вещи (Бюро находок)", icon: Gift },
+  { id: "chat-bot", title: "Чат-бот", icon: MessageCircle },
+  { id: "faq", title: "Часто задаваемые вопросы (FAQ)", icon: HelpCircle },
+  { id: "store", title: "Интернет-магазин с мерчем компании", icon: ShoppingCart },
+  { id: "school", title: "Программы Московской технической школы", icon: School },
 ]
 
-export default function ServicesScreen() {
+interface ServicesScreenProps {
+  onServiceClick: (serviceId: string) => void;
+}
+
+
+export default function ServicesScreen({ onServiceClick }: ServicesScreenProps) {
   return (
     <div>
       <div className="p-4 border-b">
@@ -21,7 +27,15 @@ export default function ServicesScreen() {
       </div>
       <div className="p-4 space-y-3">
         {services.map((service, index) => (
-          <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+          <Card
+            key={index}
+            className="cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => {
+              if (service.id === 'lost-and-found' || service.id === 'booking' || service.id === 'pass') {
+                onServiceClick(service.id)
+              }
+            }}
+          >
             <CardContent className="px-4 py-1 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="w-6 flex justify-center">

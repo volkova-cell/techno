@@ -27,32 +27,28 @@ export default function ProfileScreen() {
         </div>
 
         {/* Loyalty System */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base flex items-center gap-2">
-              <Star className="w-5 h-5 text-[#E91E63]" />
-              <span>Система баллов</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="text-center">
-              <p className="text-3xl font-bold">1,000</p>
-              <p className="text-sm text-gray-500">Текущий баланс баллов</p>
+        <Card className="bg-gradient-to-br from-[#E91E63] to-[#C2185B] text-white shadow-lg">
+          <CardContent className="p-2 flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <h2 className="font-semibold">Мои баллы:</h2>
+                <div className="text-xl font-bold">1,000</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button size="sm" className="text-xs h-auto px-2 py-1 bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm">
+                  Потратить
+                </Button>
+                <Button variant="ghost" size="icon" className="h-7 w-7 bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm">
+                  <History className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <Button variant="outline" className="flex items-center justify-center gap-2">
-                <History className="w-4 h-4" />
-                <span>История</span>
-              </Button>
-              <Button variant="outline" className="flex items-center justify-center gap-2">
-                <Share2 className="w-4 h-4" />
-                <span>Поделиться</span>
+            <div className="flex justify-center">
+              <Button size="sm" className="text-xs h-auto px-4 py-2 bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm justify-center gap-1">
+                <Share2 className="h-4 w-4" />
+                Поделиться баллами
               </Button>
             </div>
-            <Button className="w-full bg-[#E91E63] hover:bg-[#d00e46]">
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Перейти в интернет-магазин
-            </Button>
           </CardContent>
         </Card>
 
