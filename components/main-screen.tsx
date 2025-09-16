@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Bell, Calendar, CreditCard, Gift, FileText, Car, Coffee, MessageCircle, Key, Home, Map, CalendarDays, LayoutGrid, User, HelpCircle, History, ShoppingCart, Bot, BatteryMedium } from "lucide-react"
+import { Bell, Calendar, CreditCard, Gift, FileText, Car, Coffee, MessageCircle, Key, Home, Map, CalendarDays, LayoutGrid, User, HelpCircle, History, ShoppingCart, Bot } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
@@ -11,6 +11,7 @@ import ProfileScreen from "./profile-screen"
 import LostAndFoundScreen from "./lost-and-found-screen"
 import BookingScreen from "./booking-screen"
 import PassRequestScreen from "./pass-request-screen"
+import { LoadIndicatorIcon } from "./ui/load-indicator-icon"
 
 interface MainScreenProps {
   onBack: () => void
@@ -127,7 +128,7 @@ export default function MainScreen({ onBack }: MainScreenProps) {
               <div className="text-sm font-bold text-yellow-500">
                 Средняя
               </div>
-              <BatteryMedium className="h-5 w-5 text-yellow-500" />
+              <LoadIndicatorIcon loadLevel="medium" className="h-5 w-5 -mr-1" />
             </div>
           </CardContent>
         </Card>
@@ -262,7 +263,13 @@ export default function MainScreen({ onBack }: MainScreenProps) {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto no-scrollbar">
+      <div
+        className="flex-1 overflow-y-scroll no-scrollbar"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
+      >
         {renderActiveScreen()}
       </div>
 

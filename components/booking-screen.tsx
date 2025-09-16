@@ -3,12 +3,10 @@
 import { useState, useMemo } from "react"
 import { ArrowLeft, Map, List, Users, Calendar as CalendarIcon, Tag, MapPin, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar"
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter } from "@/components/ui/drawer"
 import { format } from "date-fns"
 import { ru } from "date-fns/locale"
 import { cn } from "@/lib/utils"
@@ -76,20 +74,14 @@ export default function BookingScreen({ onBack }: BookingScreenProps) {
         </TabsList>
         <TabsContent value="list" className="mt-4">
           <div className="grid grid-cols-2 gap-2 mb-4">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn("justify-start text-left font-normal", !selectedDate && "text-muted-foreground")}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {selectedDate ? format(selectedDate, "dd.MM.yyyy") : <span>Выберите дату</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} initialFocus />
-              </PopoverContent>
-            </Popover>
+            <div>
+              <Input
+                type="date"
+                value={selectedDate ? format(selectedDate, "yyyy-MM-dd") : ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSelectedDate(e.target.value ? new Date(e.target.value) : undefined)}
+                className="w-full"
+              />
+            </div>
             <Select value={selectedLocation} onValueChange={setSelectedLocation}>
               <SelectTrigger><SelectValue placeholder="Площадка" /></SelectTrigger>
               <SelectContent>
@@ -179,28 +171,38 @@ export default function BookingScreen({ onBack }: BookingScreenProps) {
           </h1>
           <div className="w-8" />
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div
+          className="flex-1 overflow-y-scroll no-scrollbar"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
+        >
           {selectedRoom ? renderBookingDetail() : renderRoomList()}
         </div>
       </div>
-      <Drawer open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
-        <DrawerContent>
-          <div className="mx-auto w-full max-w-sm text-center">
-            <DrawerHeader>
-              <div className="flex justify-center mb-2"><CheckCircle className="h-12 w-12 text-green-500" /></div>
-              <DrawerTitle>Успешно!</DrawerTitle>
-              <DrawerDescription>
-                {selectedRoom && selectedDate && `Вы забронировали "${selectedRoom.name}" на ${format(selectedDate, "d MMMM")} в ${bookingTime}.`}
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button onClick={onBack} className="w-full bg-[#E91E63] hover:bg-[#d00e46]">
+      {/* Success Modal */}
+      {isConfirmOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-sm w-full">
+            <div className="p-6 text-center">
+              <div className="flex justify-center mb-4">
+                <CheckCircle className="h-16 w-16 text-green-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Успешно!</h3>
+              <p className="text-gray-600 mb-6">
+                {selectedRoom && selectedDate && `Вы забронировали "${selectedRoom.name}" на ${format(selectedDate, "d MMMM", { locale: ru })} в ${bookingTime}.`}
+              </p>
+              <Button
+                onClick={onBack}
+                className="w-full bg-[#E91E63] hover:bg-[#d00e46]"
+              >
                 Отлично
               </Button>
-            </DrawerFooter>
+            </div>
           </div>
-        </DrawerContent>
-      </Drawer>
+        </div>
+      )}
     </>
   )
 }
