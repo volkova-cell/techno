@@ -43,7 +43,7 @@ export default function MainScreen({ onBack }: MainScreenProps) {
     { id: "store", title: "Интернет-магазин", icon: ShoppingCart },
     { id: "lost-and-found", title: "Бюро находок", icon: Gift },
     { id: "ask-question", title: "Задать вопрос", icon: Bot },
-    { id: "faq", title: "FAQ", icon: HelpCircle },
+    { id: "faq", title: "Частые вопросы", icon: HelpCircle },
   ]
 
   const activities = [

@@ -8,7 +8,7 @@ const services = [
   { id: "pass", title: "Заказ пропусков", icon: Key },
   { id: "lost-and-found", title: "Сообщить о потерянной/найденной вещи (Бюро находок)", icon: Gift },
   { id: "chat-bot", title: "Чат-бот", icon: MessageCircle },
-  { id: "faq", title: "Часто задаваемые вопросы (FAQ)", icon: HelpCircle },
+  { id: "faq", title: "Частые вопросы", icon: HelpCircle },
   { id: "store", title: "Интернет-магазин с мерчем компании", icon: ShoppingCart },
   { id: "school", title: "Программы Московской технической школы", icon: School },
 ]
