@@ -41,7 +41,6 @@ export default function MainScreen({ onBack }: MainScreenProps) {
     { id: "pass", title: "Заказать пропуск", icon: Key },
     { id: "booking", title: "Бронировать комнату", icon: Coffee },
     { id: "store", title: "Интернет-магазин", icon: ShoppingCart },
-    { id: "delivery", title: "Вызвать курьера", icon: Car },
     { id: "lost-and-found", title: "Бюро находок", icon: Gift },
     { id: "faq-bot", title: "Задать вопрос", icon: Bot },
   ]

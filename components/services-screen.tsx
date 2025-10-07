@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 const services = [
   { id: "booking", title: "Бронирование комнат для переговоров/залов", icon: Coffee },
   { id: "pass", title: "Заказ пропусков", icon: Key },
-  { id: "delivery", title: "Заказ курьера", icon: Car },
   { id: "lost-and-found", title: "Сообщить о потерянной/найденной вещи (Бюро находок)", icon: Gift },
   { id: "chat-bot", title: "Чат-бот", icon: MessageCircle },
   { id: "faq", title: "Часто задаваемые вопросы (FAQ)", icon: HelpCircle },
